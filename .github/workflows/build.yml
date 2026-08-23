@@ -28,6 +28,12 @@ jobs:
           flutter-version: '3.24.0'
           channel: 'stable'
 
+      - name: Gerar projeto nativo Android (se ainda não existir)
+        run: |
+          if [ ! -d "android" ]; then
+            flutter create --platforms=android --project-name dg_comercial_online --org com.dgcomercial .
+          fi
+
       - name: Instalar dependências
         run: flutter pub get
 
