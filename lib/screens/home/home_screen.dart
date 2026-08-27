@@ -39,16 +39,20 @@ class HomeScreen extends StatelessWidget {
                       gradient: AppColors.primaryGradient,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Icon(Icons.storefront_rounded, color: Colors.white),
+                    child: const Icon(Icons.shopping_bag_rounded, color: Colors.white, size: 22),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('DG COMERCIAL',
-                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
+                        const Text('DG COMERCIAL ONLINE',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13, letterSpacing: 0.1)),
                         Text('Olá, $firstName 👋',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: AppColors.secondaryText, fontSize: 12)),
                       ],
                     ),
@@ -153,7 +157,7 @@ class HomeScreen extends StatelessWidget {
               _sectionHeader(context, 'Categorias', hideSeeAll: true),
               const SizedBox(height: 10),
               SizedBox(
-                height: 92,
+                height: 96,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: MockData.categories.length,
@@ -192,7 +196,7 @@ class HomeScreen extends StatelessWidget {
               }),
               const SizedBox(height: 10),
               SizedBox(
-                height: 250,
+                height: 258,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: MockData.featured.length,

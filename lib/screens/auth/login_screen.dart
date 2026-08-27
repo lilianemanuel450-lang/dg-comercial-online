@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       gradient: AppColors.primaryGradient,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Icon(Icons.storefront_rounded, color: Colors.white, size: 36),
+                    child: const Icon(Icons.shopping_bag_rounded, color: Colors.white, size: 36),
                   ),
                 ),
                 const SizedBox(height: 20),

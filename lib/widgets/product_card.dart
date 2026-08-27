@@ -8,6 +8,10 @@ import '../utils/formatters.dart';
 import 'product_image_placeholder.dart';
 import 'rating_stars.dart';
 
+/// Card de produto. Altura total é controlada por quem o usa (GridView com
+/// mainAxisExtent fixo, ou SizedBox de altura fixa em listas horizontais) —
+/// por isso o conteúdo interno usa proporções fixas e enxutas para nunca
+/// estourar (overflow) a área disponível.
 class ProductCard extends StatelessWidget {
   final Product product;
   final VoidCallback onTap;
@@ -19,6 +23,8 @@ class ProductCard extends StatelessWidget {
     required this.onTap,
     this.width = 160,
   });
+
+  static const double imageHeight = 108;
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +40,26 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
+              color: Colors.black.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(8),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 children: [
-                  ProductImagePlaceholder(iconKey: product.icon, size: width - 20),
+                  ProductImagePlaceholder(
+                    iconKey: product.icon,
+                    width: double.infinity,
+                    height: imageHeight,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                   if (product.hasPromotion)
                     Positioned(
                       top: 6,
@@ -81,7 +93,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         child: Icon(
                           isFav ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                          size: 16,
+                          size: 15,
                           color: isFav ? AppColors.error : AppColors.secondaryText,
                         ),
                       ),
@@ -94,31 +106,34 @@ class ProductCard extends StatelessWidget {
                 product.name,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, height: 1.2),
+                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, height: 1.18),
               ),
               const SizedBox(height: 4),
               RatingStars(rating: product.rating, size: 12),
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Text(
-                    AppFormatters.price(product.finalPrice),
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14,
+                  Flexible(
+                    child: Text(
+                      AppFormatters.price(product.finalPrice),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                   if (product.hasPromotion) ...[
-                    const SizedBox(width: 6),
-                    Expanded(
+                    const SizedBox(width: 5),
+                    Flexible(
                       child: Text(
                         AppFormatters.price(product.price),
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: AppColors.secondaryText,
-                          fontSize: 11,
+                          fontSize: 10.5,
                         ),
                       ),
                     ),
@@ -128,7 +143,7 @@ class ProductCard extends StatelessWidget {
               const SizedBox(height: 8),
               SizedBox(
                 width: double.infinity,
-                height: 34,
+                height: 32,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,

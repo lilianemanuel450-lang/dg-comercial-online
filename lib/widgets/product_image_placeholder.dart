@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
-/// Como ainda não há upload de imagens reais, cada produto usa um
-/// ícone representativo dentro de um card com fundo suave — mantém a
-/// identidade visual limpa e é fácil de trocar por Image.network depois.
+/// Área de imagem do produto. Usa uma ilustração PNG gerada para o produto
+/// (assets/images/products/<iconKey>.png). Se o asset não existir por algum
+/// motivo, cai para um ícone simples — nunca quebra a tela.
 class ProductImagePlaceholder extends StatelessWidget {
   final String iconKey;
-  final double size;
+  final double? size;
+  final double? width;
+  final double? height;
   final BorderRadius? borderRadius;
 
   const ProductImagePlaceholder({
     super.key,
     required this.iconKey,
-    this.size = 80,
+    this.size,
+    this.width,
+    this.height,
     this.borderRadius,
   });
 
-  static const Map<String, IconData> _icons = {
+  static const Map<String, IconData> _fallbackIcons = {
     'headphones': Icons.headphones_rounded,
     'sneaker': Icons.directions_run_rounded,
     'watch': Icons.watch_rounded,
@@ -31,17 +35,29 @@ class ProductImagePlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final w = width ?? size ?? 80;
+    final h = height ?? size ?? 80;
+    final radius = borderRadius ?? BorderRadius.circular(16);
+
     return Container(
-      width: size,
-      height: size,
+      width: w,
+      height: h,
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppColors.lightBackground,
-        borderRadius: borderRadius ?? BorderRadius.circular(16),
+        borderRadius: radius,
       ),
-      child: Icon(
-        _icons[iconKey] ?? Icons.shopping_bag_rounded,
-        size: size * 0.45,
-        color: AppColors.primary,
+      padding: EdgeInsets.all(h * 0.10),
+      child: Image.asset(
+        'assets/images/products/$iconKey.png',
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) => Center(
+          child: Icon(
+            _fallbackIcons[iconKey] ?? Icons.shopping_bag_rounded,
+            size: (w < h ? w : h) * 0.45,
+            color: AppColors.primary,
+          ),
+        ),
       ),
     );
   }

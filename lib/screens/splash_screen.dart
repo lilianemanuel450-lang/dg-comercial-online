@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: const Icon(Icons.storefront_rounded, color: AppColors.primary, size: 48),
+              child: const Icon(Icons.shopping_bag_rounded, color: AppColors.primary, size: 48),
             ),
             const SizedBox(height: 20),
             const Text('DG COMERCIAL',
