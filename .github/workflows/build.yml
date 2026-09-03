@@ -52,3 +52,4 @@ jobs:
         with:
           name: dg-comercial-online-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
