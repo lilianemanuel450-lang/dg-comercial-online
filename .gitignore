@@ -13,3 +13,10 @@ ios/Flutter/Flutter.podspec
 ios/Pods/
 ios/.symlinks/
 *.log
+app-release.apk
+
+# Segredos e chaves (nunca enviar para o GitHub)
+.env
+key.properties
+*.jks
+*.keystore
