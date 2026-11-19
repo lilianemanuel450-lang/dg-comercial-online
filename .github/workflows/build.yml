@@ -2,9 +2,9 @@ name: Build APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, angoshopping-dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, angoshopping-dev ]
   workflow_dispatch:
 
 jobs:
