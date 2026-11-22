@@ -42,7 +42,7 @@ class SupportScreen extends StatelessWidget {
           const SizedBox(height: 10),
           ..._faqs.map((faq) => Container(
                 margin: const EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14)),
+                decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(14)),
                 child: ExpansionTile(
                   shape: const RoundedRectangleBorder(side: BorderSide.none),
                   title: Text(faq.$1, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
@@ -72,7 +72,7 @@ class SupportScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14)),
+      decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(14)),
       child: Row(
         children: [
           Icon(icon, color: AppColors.primary),

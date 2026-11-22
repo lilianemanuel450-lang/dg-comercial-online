@@ -40,7 +40,7 @@ class NotificationsScreen extends StatelessWidget {
                 return Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.surface,
                     borderRadius: BorderRadius.circular(14),
                     border: n.read ? null : Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
                   ),

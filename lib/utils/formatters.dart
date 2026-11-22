@@ -1,17 +1,12 @@
 import 'package:intl/intl.dart';
 
-/// Formatação de moeda. Trocar para 'AOA'/'Kz' via configuração
-/// não altera nenhum outro ponto do app.
+/// Formatação de moeda em Kwanza (Kz), sem casas decimais.
 class AppFormatters {
   AppFormatters._();
 
-  static const String currencySymbol = 'R\$';
+  static const String currencySymbol = 'Kz';
 
-  static final NumberFormat _formatter = NumberFormat.currency(
-    locale: 'pt_BR',
-    symbol: currencySymbol,
-    decimalDigits: 2,
-  );
+  static final NumberFormat _formatter = NumberFormat('#,##0', 'pt_BR');
 
-  static String price(double value) => _formatter.format(value);
+  static String price(double value) => '$currencySymbol ${_formatter.format(value)}';
 }

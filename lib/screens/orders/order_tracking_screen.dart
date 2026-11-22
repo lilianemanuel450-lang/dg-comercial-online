@@ -44,7 +44,7 @@ class OrderTrackingScreen extends StatelessWidget {
           if (!cancelled)
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(16)),
               child: Column(
                 children: List.generate(_stepLabels.length, (i) {
                   final done = i <= currentIndex;
@@ -114,7 +114,7 @@ class OrderTrackingScreen extends StatelessWidget {
           ...order.items.map((item) => Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14)),
+                decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(14)),
                 child: Row(
                   children: [
                     ProductImagePlaceholder(iconKey: item.product.icon, size: 48),
@@ -137,7 +137,7 @@ class OrderTrackingScreen extends StatelessWidget {
           const SizedBox(height: 10),
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(16)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -146,7 +146,7 @@ class OrderTrackingScreen extends StatelessWidget {
                 Text(order.address.formatted, style: const TextStyle(color: AppColors.secondaryText)),
                 const Divider(height: 24),
                 _summaryRow('Subtotal', AppFormatters.price(order.subtotal)),
-                _summaryRow('Frete', AppFormatters.price(order.shipping)),
+                _summaryRow('Frete', order.shipping == 0 ? 'Grátis' : AppFormatters.price(order.shipping)),
                 _summaryRow('Total', AppFormatters.price(order.total), bold: true),
               ],
             ),

@@ -24,7 +24,7 @@ class AccountScreen extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(16)),
             child: Row(
               children: [
                 CircleAvatar(
@@ -90,7 +90,7 @@ class AccountScreen extends StatelessWidget {
 
   Widget _sectionCard(BuildContext context, List<Widget> children) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(16)),
       child: Column(children: children),
     );
   }

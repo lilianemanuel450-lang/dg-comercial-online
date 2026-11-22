@@ -77,9 +77,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   double get _shippingCost {
     switch (_delivery) {
       case _DeliveryOption.normal:
-        return 10.0;
+        return context.read<CartProvider>().shipping;
       case _DeliveryOption.rapida:
-        return 25.0;
+        return 5000.0;
       case _DeliveryOption.retirada:
         return 0.0;
     }
@@ -121,7 +121,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               boxShadow: [
                 BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 10, offset: const Offset(0, -2)),
               ],
@@ -212,9 +212,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           children: [
             const SizedBox(height: 8),
             _deliveryTile(_DeliveryOption.normal, 'Entrega normal', '3 a 7 dias úteis',
-                AppFormatters.price(10.0)),
+                (context.read<CartProvider>().shipping == 0 ? 'Grátis' : AppFormatters.price(context.read<CartProvider>().shipping))),
             _deliveryTile(_DeliveryOption.rapida, 'Entrega rápida', '1 a 2 dias úteis',
-                AppFormatters.price(25.0)),
+                AppFormatters.price(5000.0)),
             _deliveryTile(_DeliveryOption.retirada, 'Levantamento em ponto físico',
                 'Disponível hoje', 'Grátis'),
           ],
@@ -270,7 +270,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: selected ? AppColors.primary : AppColors.border, width: selected ? 1.5 : 1),
           ),
@@ -309,7 +309,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: selected ? AppColors.primary : AppColors.border, width: selected ? 1.5 : 1),
           ),

@@ -11,7 +11,7 @@ class CartProvider extends ChangeNotifier {
 
   double get subtotal => _items.fold(0.0, (sum, item) => sum + item.totalPrice);
 
-  double get shipping => _items.isEmpty ? 0 : 10.0;
+  double get shipping => (_items.isEmpty || subtotal >= 50000.0) ? 0 : 2500.0;
 
   double get discount => 0.0;
 

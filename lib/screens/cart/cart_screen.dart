@@ -50,7 +50,7 @@ class CartScreen extends StatelessWidget {
                       return Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.surface,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
@@ -100,7 +100,7 @@ class CartScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.surface,
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                     boxShadow: [
                       BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 10, offset: const Offset(0, -2)),
@@ -114,7 +114,7 @@ class CartScreen extends StatelessWidget {
                             style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
                         const SizedBox(height: 12),
                         _summaryRow('Subtotal', AppFormatters.price(cart.subtotal)),
-                        _summaryRow('Frete', AppFormatters.price(cart.shipping)),
+                        _summaryRow('Frete', cart.shipping == 0 ? 'Grátis' : AppFormatters.price(cart.shipping)),
                         _summaryRow('Desconto', '- ${AppFormatters.price(cart.discount)}'),
                         const Divider(height: 20),
                         _summaryRow('Total', AppFormatters.price(cart.total), bold: true),

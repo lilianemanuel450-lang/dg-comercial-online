@@ -34,7 +34,7 @@ class _MainShellState extends State<MainShell> {
       body: IndexedStack(index: _index, children: _screens),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.background,
           boxShadow: [
             BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 12, offset: const Offset(0, -2)),
           ],

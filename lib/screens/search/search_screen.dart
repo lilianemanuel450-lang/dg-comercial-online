@@ -53,7 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         for (final term in ['fone', 'tênis', 'smartwatch', 'notebook', 'perfume'])
                           ActionChip(
                             label: Text(term),
-                            backgroundColor: Colors.white,
+                            backgroundColor: AppColors.surface,
                             onPressed: () {
                               _controller.text = term;
                               _runSearch(term);
