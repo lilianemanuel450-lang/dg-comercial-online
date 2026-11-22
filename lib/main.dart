@@ -26,9 +26,9 @@ class DgComercialOnlineApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NotificationsProvider()),
       ],
       child: MaterialApp(
-        title: 'DG Comercial Online',
+        title: 'Angoshopping',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
+        theme: AppTheme.dark,
         home: const SplashScreen(),
       ),
     );
