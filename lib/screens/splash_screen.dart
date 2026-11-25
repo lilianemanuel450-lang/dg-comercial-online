@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../navigation/main_shell.dart';
+import '../theme/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,17 +10,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  static const _gradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [
-      Color(0xFFFF7A18),
-      Color(0xFFFF3D3D),
-      Color(0xFFE91E8C),
-      Color(0xFF7B2FF7),
-    ],
-  );
-
   @override
   void initState() {
     super.initState();
@@ -35,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0B0B0F),
+      backgroundColor: AppColors.background,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,11 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 96,
               height: 96,
               decoration: BoxDecoration(
-                gradient: _gradient,
+                gradient: AppColors.heroGradient,
                 borderRadius: BorderRadius.circular(28),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: Color(0x66E91E8C),
+                    color: AppColors.magenta.withAlpha(102),
                     blurRadius: 32,
                     spreadRadius: 2,
                   ),
@@ -59,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 24),
             ShaderMask(
-              shaderCallback: (rect) => _gradient.createShader(rect),
+              shaderCallback: (rect) => AppColors.heroGradient.createShader(rect),
               child: const Text(
                 'ANGOSHOPPING',
                 style: TextStyle(
@@ -73,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 10),
             const Text(
               'Compra. Descobre. Vive melhor.',
-              style: TextStyle(color: Colors.white70, fontSize: 13),
+              style: TextStyle(color: AppColors.secondaryText, fontSize: 13),
             ),
             const SizedBox(height: 36),
             const SizedBox(
@@ -81,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 24,
               child: CircularProgressIndicator(
                 strokeWidth: 2.5,
-                color: Color(0xFFFF7A18),
+                color: AppColors.orange,
               ),
             ),
           ],
