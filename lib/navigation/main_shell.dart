@@ -31,67 +31,94 @@ class _MainShellState extends State<MainShell> {
     final cartCount = context.watch<CartProvider>().totalQuantity;
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: IndexedStack(index: _index, children: _screens),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.background,
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 12, offset: const Offset(0, -2)),
-          ],
+          border: Border(
+            top: BorderSide(color: AppColors.border, width: 0.5),
+          ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _navItem(0, Icons.home_rounded, 'Início'),
-                _navItem(1, Icons.grid_view_rounded, 'Categorias'),
-                _navItem(2, Icons.shopping_cart_rounded, 'Carrinho', badge: cartCount),
-                _navItem(3, Icons.inventory_2_rounded, 'Pedidos'),
-                _navItem(4, Icons.person_rounded, 'Conta'),
-              ],
-            ),
+          top: false,
+          child: Row(
+            children: [
+              _navItem(0, Icons.home_rounded, Icons.home_outlined, 'Início'),
+              _navItem(1, Icons.grid_view_rounded, Icons.grid_view_outlined,
+                  'Categorias'),
+              _navItem(2, Icons.shopping_bag_rounded,
+                  Icons.shopping_bag_outlined, 'Carrinho',
+                  badge: cartCount),
+              _navItem(3, Icons.inventory_2_rounded,
+                  Icons.inventory_2_outlined, 'Pedidos'),
+              _navItem(4, Icons.person_rounded, Icons.person_outline_rounded,
+                  'Conta'),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _navItem(int index, IconData icon, String label, {int badge = 0}) {
+  Widget _navItem(
+    int index,
+    IconData activeIcon,
+    IconData icon,
+    String label, {
+    int badge = 0,
+  }) {
     final selected = _index == index;
-    final color = selected ? AppColors.primary : AppColors.secondaryText;
 
-    return GestureDetector(
-      onTap: () => setState(() => _index = index),
-      behavior: HitTestBehavior.opaque,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Icon(icon, color: color, size: 24),
-              if (badge > 0)
-                Positioned(
-                  right: -8,
-                  top: -4,
-                  child: Container(
-                    padding: const EdgeInsets.all(3),
-                    constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
-                    decoration: const BoxDecoration(color: AppColors.error, shape: BoxShape.circle),
-                    child: Text(
-                      '$badge',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w700),
-                    ),
+    return Expanded(
+      child: Semantics(
+        label: label,
+        button: true,
+        selected: selected,
+        child: GestureDetector(
+          onTap: () => setState(() => _index = index),
+          behavior: HitTestBehavior.opaque,
+          child: SizedBox(
+            height: 52,
+            child: Center(
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Icon(
+                    selected ? activeIcon : icon,
+                    color: selected
+                        ? AppColors.darkText
+                        : AppColors.secondaryText,
+                    size: 28,
                   ),
-                ),
-            ],
+                  if (badge > 0)
+                    Positioned(
+                      right: -9,
+                      top: -5,
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        constraints: const BoxConstraints(
+                            minWidth: 16, minHeight: 16),
+                        decoration: const BoxDecoration(
+                          color: AppColors.error,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          badge > 9 ? '9+' : '$badge',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ),
-          const SizedBox(height: 4),
-          Text(label, style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w600)),
-        ],
+        ),
       ),
     );
   }
